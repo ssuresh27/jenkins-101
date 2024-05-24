@@ -1,0 +1,44 @@
+#https://stackoverflow.com/questions/46032392/docker-compose-does-not-allow-to-use-local-images
+#Updated to use image instad of building on each time
+version: '3'
+services:
+  contoller:
+    image: yessures/controller:latest
+    tty: true
+    volumes:
+      - ./demo:/app
+    ports:
+      - 1101:22
+  
+  node1:
+    image: yessures/nodes:latest
+    tty: true
+    ports:
+      - 1111:22
+      - 5001:5000
+
+  node2:
+    image: yessures/nodes:latest
+    tty: true
+    ports:
+      - 2222:22
+      - 5002:5000
+ 
+
+  pgdb01:
+      image: postgres:14-alpine
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+      - ./data:/var/lib/postgresql/data
+      ports:
+        - 5432:5432
+
+
+networks:
+  network1:
+    name: jenkins
+    external: true
+      

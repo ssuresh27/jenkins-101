@@ -1,9 +1,0 @@
----
-- name: Deploy web application
-  serial: 1
-  hosts: all
-  roles:
-    - python
-    - copy_files
-    - psql_db
-    - flask_web

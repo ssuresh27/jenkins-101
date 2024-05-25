@@ -1,3 +1,0 @@
-CREATE DATABASE flask_db;
-CREATE USER ssuresh WITH PASSWORD 'welcome123';
-GRANT ALL PRIVILEGES ON DATABASE flask_db TO ssuresh;
